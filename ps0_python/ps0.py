@@ -23,8 +23,8 @@ else:
     d.Monochrome image of blue channel
 '''
 img1_swapped = img1.copy()
-img1_swapped[:, :, 0], img1_swapped[:, :,
-                                    2] = img1_swapped[:, :, 2], img1_swapped[:, :, 0]
+img1_swapped[:, :, 0], img1_swapped[:, :, 2] =\
+    img1_swapped[:, :, 2], img1_swapped[:, :, 0]
 img1_green = img1[:, :, 1]
 img1_red = img1[:, :, 2]
 img1_blue = img1[:, :, 0]
@@ -83,3 +83,16 @@ img1_diff_shifted = img1_diff_shifted-img1_green
 cv2.imwrite('output/ps0-4-d-1.png', img1_diff_shifted)
 
 # Question 5: Noise
+
+# 5a
+img_green_noise = img1.copy()
+height, width, depth = img_green_noise.shape
+noise = np.zeros((height, width), np.uint8)
+cv2.randn(noise, 0, 30)
+img_green_noise[:, :, 1] = img_green_noise[:, :, 1] + noise
+cv2.imwrite('output/ps0-5-a-1.png', img_green_noise)
+
+# 5b
+img_blue_noise = img1.copy()
+img_blue_noise[:, :, 0] = img_blue_noise[:, :, 0] + noise
+cv2.imwrite('output/ps0-5-b-1.png', img_blue_noise)
